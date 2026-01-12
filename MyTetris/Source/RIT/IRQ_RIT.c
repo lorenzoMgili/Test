@@ -13,7 +13,7 @@
 #include "timer.h"
 #include "music.h"
 #include "adc.h"
-
+#include "game.h"
 /******************************************************************************
 ** Function name:		RIT_IRQHandler
 **
@@ -34,8 +34,17 @@ void RIT_IRQHandler (void)
 	static int currentNote = 0;
 	static int effectNote = 0;
 	static int ticks = 0;
+	static int ticksDebouncing = 0;
 	
-
+	if (isButton1Paused() || isButton2Paused()){
+		ticksDebouncing++;
+		
+		if (ticksDebouncing>3){
+			clearButtons();
+			ticksDebouncing=0;
+		}
+	}
+	else ticksDebouncing=0;
 	
 	if(!isNotePlaying())
 	{

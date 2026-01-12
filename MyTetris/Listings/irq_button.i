@@ -1,7 +1,7 @@
 # 1 "Source/button_EXINT/IRQ_button.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
-# 404 "<built-in>" 3
+# 394 "<built-in>" 3
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
 # 1 "Source/button_EXINT/IRQ_button.c" 2
@@ -12,8 +12,8 @@ void EINT1_IRQHandler(void);
 void EINT2_IRQHandler(void);
 void EINT3_IRQHandler(void);
 # 2 "Source/button_EXINT/IRQ_button.c" 2
-# 1 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 1
-# 41 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 1 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h" 1
+# 41 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h"
 typedef enum IRQn
 {
 
@@ -65,7 +65,7 @@ typedef enum IRQn
   USBActivity_IRQn = 33,
   CANActivity_IRQn = 34,
 } IRQn_Type;
-# 106 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 106 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h"
 # 1 "./Source/CMSIS_core\\core_cm3.h" 1
 # 29 "./Source/CMSIS_core\\core_cm3.h" 3
 
@@ -73,8 +73,8 @@ typedef enum IRQn
 
 
 
-# 1 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
-# 56 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
+# 1 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
+# 56 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
 typedef signed char int8_t;
 typedef signed short int int16_t;
 typedef signed int int32_t;
@@ -975,9 +975,9 @@ static __inline int32_t ITM_CheckChar (void)
     return (1);
   }
 }
-# 107 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 2
-# 1 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\system_LPC17xx.h" 1
-# 49 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\system_LPC17xx.h"
+# 107 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h" 2
+# 1 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\system_LPC17xx.h" 1
+# 49 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\system_LPC17xx.h"
 extern uint32_t SystemCoreClock;
 
 
@@ -994,8 +994,8 @@ extern void SystemInit (void);
 
 
 extern void SystemCoreClockUpdate (void);
-# 108 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 2
-# 120 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 108 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h" 2
+# 120 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h"
 typedef struct
 {
   volatile uint32_t FLASHCFG;
@@ -1810,7 +1810,14 @@ void update();
 void togglePaused();
 void setHardDrop();
 void updateSpeed(float value);
+
+void clearButtons();
+int isButton1Paused();
+int isButton2Paused();
+void pauseButton1();
+void pauseButton2();
 # 5 "Source/button_EXINT/IRQ_button.c" 2
+
 
 void EINT0_IRQHandler (void)
 {
@@ -1821,12 +1828,18 @@ void EINT0_IRQHandler (void)
 
 void EINT1_IRQHandler (void)
 {
- togglePause();
+ if (!isButton1Paused()){
+  togglePause();
+  pauseButton1();
+ }
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->EXTINT &= (1 << 1);
 }
 
 void EINT2_IRQHandler (void)
 {
- setHardDrop();
+ if (!isButton2Paused()){
+  setHardDrop();
+  pauseButton2();
+ }
   ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->EXTINT &= (1 << 2);
 }

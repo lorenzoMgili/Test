@@ -71,8 +71,8 @@
 #define Cyan         	  0x7FFF
 #define Yellow        	0xFFE0
 #define Orange       	  0xFBE0
-#define Purple					0x881f
-#define DarkRed				 	0x8000
+#define Pink						0xFE19
+#define Gray				 		0xDEFB
 
 /******************************************************************************
 * Function Name  : RGB565CONVERT

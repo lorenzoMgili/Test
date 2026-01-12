@@ -1,7 +1,7 @@
 # 1 "Source/game/game.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
-# 404 "<built-in>" 3
+# 394 "<built-in>" 3
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
 # 1 "Source/game/game.c" 2
@@ -27,11 +27,17 @@ void update();
 void togglePaused();
 void setHardDrop();
 void updateSpeed(float value);
+
+void clearButtons();
+int isButton1Paused();
+int isButton2Paused();
+void pauseButton1();
+void pauseButton2();
 # 4 "Source/game/game.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 26 "./Source/GLCD\\GLCD.h"
-# 1 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 1
-# 41 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 1 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h" 1
+# 41 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h"
 typedef enum IRQn
 {
 
@@ -83,7 +89,7 @@ typedef enum IRQn
   USBActivity_IRQn = 33,
   CANActivity_IRQn = 34,
 } IRQn_Type;
-# 106 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 106 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h"
 # 1 "./Source/CMSIS_core\\core_cm3.h" 1
 # 29 "./Source/CMSIS_core\\core_cm3.h" 3
 
@@ -91,8 +97,8 @@ typedef enum IRQn
 
 
 
-# 1 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
-# 56 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
+# 1 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 1 3
+# 56 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdint.h" 3
 typedef signed char int8_t;
 typedef signed short int int16_t;
 typedef signed int int32_t;
@@ -993,9 +999,9 @@ static __inline int32_t ITM_CheckChar (void)
     return (1);
   }
 }
-# 107 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 2
-# 1 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\system_LPC17xx.h" 1
-# 49 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\system_LPC17xx.h"
+# 107 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h" 2
+# 1 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\system_LPC17xx.h" 1
+# 49 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\system_LPC17xx.h"
 extern uint32_t SystemCoreClock;
 
 
@@ -1012,8 +1018,8 @@ extern void SystemInit (void);
 
 
 extern void SystemCoreClockUpdate (void);
-# 108 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 2
-# 120 "C:/Users/loren/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 108 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h" 2
+# 120 "C:/Keil_v5/ARM/PACK/Keil/LPC1700_DFP/2.7.1/Device/Include\\LPC17xx.h"
 typedef struct
 {
   volatile uint32_t FLASHCFG;
@@ -1816,10 +1822,10 @@ void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t
 void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor );
 void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
 # 5 "Source/game/game.c" 2
-# 1 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 1 3
-# 58 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 1 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 1 3
+# 58 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
     typedef unsigned int size_t;
-# 82 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 82 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
 typedef unsigned int clock_t;
 typedef unsigned int time_t;
 
@@ -1854,7 +1860,7 @@ struct tm {
         };
     };
 };
-# 127 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 127 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
 extern __attribute__((__nothrow__)) clock_t clock(void);
 
 
@@ -1869,13 +1875,13 @@ extern __attribute__((__nothrow__)) double difftime(time_t , time_t );
 
 
 extern __attribute__((__nothrow__)) time_t mktime(struct tm * ) __attribute__((__nonnull__(1)));
-# 156 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 156 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
 extern __attribute__((__nothrow__)) time_t time(time_t * );
-# 166 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 166 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
 extern __attribute__((__nothrow__)) char *asctime(const struct tm * ) __attribute__((__nonnull__(1)));
 extern __attribute__((__nothrow__)) char *_asctime_r(const struct tm * ,
                                 char * __restrict ) __attribute__((__nonnull__(1,2)));
-# 178 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 178 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
 extern __attribute__((__nothrow__)) char *ctime(const time_t * ) __attribute__((__nonnull__(1)));
 
 
@@ -1892,7 +1898,7 @@ extern __attribute__((__nothrow__)) struct tm *gmtime(const time_t * ) __attribu
 extern __attribute__((__nothrow__)) struct tm *localtime(const time_t * ) __attribute__((__nonnull__(1)));
 extern __attribute__((__nothrow__)) struct tm *_localtime_r(const time_t * __restrict ,
                                        struct tm * __restrict ) __attribute__((__nonnull__(1,2)));
-# 203 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+# 203 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
 extern __attribute__((__nothrow__)) size_t strftime(char * __restrict , size_t ,
                        const char * __restrict ,
                        const struct tm * __restrict ) __attribute__((__nonnull__(1,3,4)));
@@ -1956,6 +1962,7 @@ typedef enum frequencies
  g5 = 709, // 784Hz k=709 g5
  gs5 = 669, // 831Hz k=669 gs5
  a5 = 632, // 880Hz k=632 a5
+ e6=1684,
  pause = 0 // DO NOT SOUND
 } FREQUENCY;
 
@@ -1996,10 +2003,10 @@ extern SoundEffect playingEffect;
 
 void playEffect(SoundEffect effect);
 # 7 "Source/game/game.c" 2
-# 1 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
-# 68 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 1 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
+# 68 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     typedef __builtin_va_list __va_list;
-# 87 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 87 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 typedef struct __fpos_t_struct {
     unsigned long long int __pos;
 
@@ -2011,9 +2018,9 @@ typedef struct __fpos_t_struct {
         unsigned int __state1, __state2;
     } __mbstate;
 } fpos_t;
-# 108 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 108 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 typedef struct __FILE FILE;
-# 119 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 119 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 struct __FILE {
     union {
         long __FILE_alignment;
@@ -2024,10 +2031,10 @@ struct __FILE {
 
     } __FILE_opaque;
 };
-# 138 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 138 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern FILE __stdin, __stdout, __stderr;
 extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
-# 224 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 224 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__nonnull__(1)));
 
 
@@ -2037,7 +2044,7 @@ extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__n
 
 
 extern __attribute__((__nothrow__)) int rename(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 243 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 243 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *tmpfile(void);
 
 
@@ -2046,18 +2053,18 @@ extern __attribute__((__nothrow__)) FILE *tmpfile(void);
 
 
 extern __attribute__((__nothrow__)) char *tmpnam(char * );
-# 265 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 265 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fclose(FILE * ) __attribute__((__nonnull__(1)));
-# 275 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 275 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fflush(FILE * );
-# 285 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 285 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *fopen(const char * __restrict ,
                            const char * __restrict ) __attribute__((__nonnull__(1,2)));
-# 329 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 329 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) FILE *freopen(const char * __restrict ,
                     const char * __restrict ,
                     FILE * __restrict ) __attribute__((__nonnull__(2,3)));
-# 342 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 342 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
                     char * __restrict ) __attribute__((__nonnull__(1)));
 
@@ -2069,11 +2076,11 @@ extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
 extern __attribute__((__nothrow__)) int setvbuf(FILE * __restrict ,
                    char * __restrict ,
                    int , size_t ) __attribute__((__nonnull__(1)));
-# 370 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 370 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int fprintf(FILE * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 393 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 393 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int _fprintf(FILE * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
@@ -2118,7 +2125,7 @@ extern __attribute__((__nothrow__)) int _sprintf(char * __restrict , const char 
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int __ARM_snprintf(char * __restrict , size_t ,
                      const char * __restrict , ...) __attribute__((__nonnull__(3)));
-# 460 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 460 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
                       const char * __restrict , ...) __attribute__((__nonnull__(3)));
@@ -2130,7 +2137,7 @@ extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int fscanf(FILE * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 503 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 503 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int _fscanf(FILE * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
@@ -2159,11 +2166,11 @@ extern __attribute__((__nothrow__)) int _scanf(const char * __restrict , ...) __
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int sscanf(const char * __restrict ,
                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 541 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 541 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __scanf_args
 extern __attribute__((__nothrow__)) int _sscanf(const char * __restrict ,
                      const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 555 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 555 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
 extern __attribute__((__nothrow__)) int _vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
 extern __attribute__((__nothrow__)) int _vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
@@ -2185,13 +2192,13 @@ extern __attribute__((__nothrow__)) int _vprintf(const char * __restrict , __va_
 
 extern __attribute__((__nothrow__)) int vfprintf(FILE * __restrict ,
                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 584 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 584 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int vsprintf(char * __restrict ,
                      const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 594 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 594 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int __ARM_vsnprintf(char * __restrict , size_t ,
                      const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 609 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 609 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _vsprintf(char * __restrict ,
                       const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
 
@@ -2208,18 +2215,18 @@ extern __attribute__((__nothrow__)) int _vfprintf(FILE * __restrict ,
 
 extern __attribute__((__nothrow__)) int _vsnprintf(char * __restrict , size_t ,
                       const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 635 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 635 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 #pragma __printf_args
 extern __attribute__((__nothrow__)) int __ARM_asprintf(char ** , const char * __restrict , ...) __attribute__((__nonnull__(2)));
 extern __attribute__((__nothrow__)) int __ARM_vasprintf(char ** , const char * __restrict , __va_list ) __attribute__((__nonnull__(2)));
-# 649 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 649 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fgetc(FILE * ) __attribute__((__nonnull__(1)));
-# 659 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 659 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) char *fgets(char * __restrict , int ,
                     FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 673 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 673 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fputc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 683 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 683 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * __restrict ) __attribute__((__nonnull__(1,2)));
 
 
@@ -2228,13 +2235,13 @@ extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * _
 
 
 extern __attribute__((__nothrow__)) int getc(FILE * ) __attribute__((__nonnull__(1)));
-# 704 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 704 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     extern __attribute__((__nothrow__)) int (getchar)(void);
-# 713 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 713 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) char *gets(char * ) __attribute__((__nonnull__(1)));
-# 725 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 725 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int putc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 737 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 737 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     extern __attribute__((__nothrow__)) int (putchar)(int );
 
 
@@ -2251,26 +2258,26 @@ extern __attribute__((__nothrow__)) int puts(const char * ) __attribute__((__non
 
 
 extern __attribute__((__nothrow__)) int ungetc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 778 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 778 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t fread(void * __restrict ,
                     size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 794 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 794 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t __fread_bytes_avail(void * __restrict ,
                     size_t , FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 810 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 810 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) size_t fwrite(const void * __restrict ,
                     size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 822 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 822 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fgetpos(FILE * __restrict , fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 833 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 833 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fseek(FILE * , long int , int ) __attribute__((__nonnull__(1)));
-# 850 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 850 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int fsetpos(FILE * __restrict , const fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 863 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 863 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) long int ftell(FILE * ) __attribute__((__nonnull__(1)));
-# 877 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 877 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void rewind(FILE * ) __attribute__((__nonnull__(1)));
-# 886 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 886 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) void clearerr(FILE * ) __attribute__((__nonnull__(1)));
 
 
@@ -2290,7 +2297,7 @@ extern __attribute__((__nothrow__)) int ferror(FILE * ) __attribute__((__nonnull
 
 
 extern __attribute__((__nothrow__)) void perror(const char * );
-# 917 "C:\\Users\\loren\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+# 917 "C:\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
 extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnull__(1)));
 
 
@@ -2299,6 +2306,10 @@ extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
 extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
 # 8 "Source/game/game.c" 2
 # 18 "Source/game/game.c"
+//Variables for button debouncing
+static volatile int pause1=0;
+static volatile int pause2=0;
+
 //Board specifics
 typedef uint16_t Color;
 Color tetrisBoard[20][10] = {0};
@@ -2377,8 +2388,7 @@ void moveSideCurrentTetromino(int direction);
 void rotateCurrentTetromino();
 
 //Functions for flags
-void togglePause();
-void adjustPause();
+void setPause();
 void setHardDrop();
 
 //Functions related to Power Ups and Malus
@@ -2396,14 +2406,20 @@ int deleteRows ();
 int getPoints(int deletedLines);
 JoystickAction getJoystickAction ();
 
+//Functions for buttonDebouncing
+void clearButtons();
+int isButton1Paused();
+int isButton2Paused();
+void pauseButton1();
+void pauseButton2();
+
 //Update function managing each screen refresh
 void update(){
  Tetromino oldTetromino;
  JoystickAction j;
 
  //do not do anything if game paused
- if (flags.pause > 1){
-  adjustPause();
+ if (flags.pause){
   seed++;
   return;
  }
@@ -2470,7 +2486,6 @@ void update(){
  //condition determining refresh speed of block going down
  if (numTicsFromLastUpdate >= 15/flags.speed || flags.hardDrop){
   numTicsFromLastUpdate=0;
-  adjustPause();
 
   //apply hard drop if key 2 is pressed
   if(flags.hardDrop){
@@ -2500,10 +2515,10 @@ void update(){
     playEffect(LINE_CLEAR_EFFECT);
     int beforeLines = scores.lines;
     scores.lines += deleted;
-    if(scores.lines / 1 > beforeLines / 1){
+    if(scores.lines / 5 > beforeLines / 5){
      spawnPowerUp();
     }
-    if(scores.lines / 3 > beforeLines / 3){
+    if(scores.lines / 10 > beforeLines / 10){
      if (malusEndsGame()){
       endGame();
       return;
@@ -2590,7 +2605,7 @@ void initGame(){
 
  LCD_Clear(0x0000);
  currentTetromino = generateTetromino();
- flags.pause=2;
+ flags.pause=1;
  flags.speed=1;
  scores.current = 0;
  scores.lines = 0;
@@ -2622,7 +2637,7 @@ void displayGame(){
 void resetGame () {
  int x,y;
  currentTetromino = generateTetromino();
- flags.pause=2;
+ flags.pause=1;
  flags.speed=1;
  scores.current = 0;
  scores.lines = 0;
@@ -3166,7 +3181,7 @@ int deleteRows () {
   }
   if (full) {
    for (x = 0; x< 10;x++) {
-    if(tetrisBoard[y][x] == 0x881f){
+    if(tetrisBoard[y][x] == 0xFE19){
      triggerClear = 1;
     }else if(tetrisBoard[y][x] == 0x2444){
      slowDown(15);
@@ -3196,19 +3211,8 @@ int getPoints(int deletedLines){
  return points;
 }
 void togglePause(){
- if (flags.pause == 0) {
-  flags.pause = 3;
- } else if (flags.pause == 2){
-  flags.pause = 1;
- }
-}
-
-void adjustPause(){
- if (flags.pause == 1){
-  flags.pause = 0;
- } else if (flags.pause == 3){
-  flags.pause = 2;
- }
+ if (flags.pause) flags.pause=0;
+ else flags.pause=1;
 }
 
 void setHardDrop(){
@@ -3252,7 +3256,7 @@ void spawnPowerUp(){
  int x, y;
  for(y = 0; y < 20; y++) {
   for (x = 0; x < 10; x++ ){
-   if (tetrisBoard[y][x] != 0x0000 && tetrisBoard[y][x] != 0x881f && tetrisBoard[y][x] != 0x2444){
+   if (tetrisBoard[y][x] != 0x0000 && tetrisBoard[y][x] != 0xFE19 && tetrisBoard[y][x] != 0x2444){
     nBlocks++;
    }
   }
@@ -3261,11 +3265,11 @@ void spawnPowerUp(){
 
  for(y = 0; y < 20; y++) {
   for (x = 0; x < 10; x++ ){
-   if (tetrisBoard[y][x] != 0x0000 && tetrisBoard[y][x] != 0x881f && tetrisBoard[y][x] != 0x2444){
+   if (tetrisBoard[y][x] != 0x0000 && tetrisBoard[y][x] != 0xFE19 && tetrisBoard[y][x] != 0x2444){
     nBlocks--;
    }
    if(nBlocks == targetBlock){
-    tetrisBoard[y][x] = (rand() % 2) ? 0x881f : 0x2444;
+    tetrisBoard[y][x] = (rand() % 2) ? 0xFE19 : 0x2444;
     return;
    }
   }
@@ -3286,7 +3290,7 @@ void spawnMalus(){
   m=rand()%10;
   if (tetrisBoard[20 -1][m]==0x0000){
    malusBlocks++;
-   tetrisBoard[20 -1][m]=0x8000;
+   tetrisBoard[20 -1][m]=0xDEFB;
   }
  }
 }
@@ -3322,4 +3326,23 @@ JoystickAction getJoystickAction (){
         return J_SELECT;
     }
  return J_NONE;
+}
+
+void clearButtons(){
+ pause1=0;
+ pause2=0;
+}
+
+int isButton1Paused(){
+ return pause1;
+}
+
+int isButton2Paused(){
+ return pause2;
+}
+void pauseButton1(){
+ pause1=1;
+}
+void pauseButton2(){
+ pause2=1;
 }

@@ -31,7 +31,7 @@ void TIMER0_IRQHandler (void)
 	static int currentValue; 
 	currentValue = SinTable[sineticks];
 	/* Position value in bits 6-15, BIAS=0 for max output current/volume */
-	LPC_DAC->DACR = ((currentValue >> 0) << 6);
+	LPC_DAC->DACR = ((currentValue >> 2) << 6);
 	sineticks++;
 	if(sineticks==45) sineticks=0;
 

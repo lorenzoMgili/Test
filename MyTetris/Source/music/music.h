@@ -56,6 +56,7 @@ typedef enum frequencies
 	g5 = 709,	// 784Hz	k=709 g5
 	gs5 = 669,	// 831Hz	k=669 gs5
 	a5 = 632,	// 880Hz	k=632 a5
+	e6=1684,
 	pause = 0		// DO NOT SOUND
 } FREQUENCY;
 

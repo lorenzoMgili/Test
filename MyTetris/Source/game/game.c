@@ -9,11 +9,15 @@
 #define X 10
 #define Y 20
 #define SLOW_DOWN_POWERUP DarkGreen
-#define CLEAR_LINE_POWERUP Purple
-#define MALUS_COLOR DarkRed
+#define CLEAR_LINE_POWERUP Pink
+#define MALUS_COLOR Gray
 
-#define POWERUP_NUM_LINES 1
-#define MALUS_NUM_LINES 3
+#define POWERUP_NUM_LINES 5
+#define MALUS_NUM_LINES 10
+
+//Variables for button debouncing
+static volatile int pause1=0;
+static volatile int pause2=0;
 
 //Board specifics
 typedef uint16_t Color;
@@ -93,8 +97,7 @@ void moveSideCurrentTetromino(int direction);
 void rotateCurrentTetromino();
 
 //Functions for flags
-void togglePause();
-void adjustPause();
+void setPause();
 void setHardDrop();
 
 //Functions related to Power Ups and Malus
@@ -112,14 +115,20 @@ int deleteRows ();
 int getPoints(int deletedLines);
 JoystickAction getJoystickAction ();
 
+//Functions for buttonDebouncing
+void clearButtons();
+int isButton1Paused();
+int isButton2Paused();
+void pauseButton1();
+void pauseButton2();
+
 //Update function managing each screen refresh
 void update(){
 	Tetromino oldTetromino;
 	JoystickAction j;
 	
 	//do not do anything if game paused
-	if (flags.pause > 1){
-		adjustPause();
+	if (flags.pause){
 		seed++;
 		return;
 	}
@@ -186,7 +195,6 @@ void update(){
 	//condition determining refresh speed of block going down
 	if (numTicsFromLastUpdate >= FRAMES/flags.speed || flags.hardDrop){
 		numTicsFromLastUpdate=0;
-		adjustPause();
 		
 		//apply hard drop if key 2 is pressed
 		if(flags.hardDrop){
@@ -306,7 +314,7 @@ void initGame(){
 	
 	LCD_Clear(Black);
 	currentTetromino = generateTetromino();
-	flags.pause=2;
+	flags.pause=1;
 	flags.speed=1;
 	scores.current = 0;
 	scores.lines = 0;
@@ -338,7 +346,7 @@ void displayGame(){
 void resetGame () {
 	int x,y;
 	currentTetromino = generateTetromino();
-	flags.pause=2;
+	flags.pause=1;
 	flags.speed=1;
 	scores.current = 0;
 	scores.lines = 0;
@@ -912,19 +920,8 @@ int getPoints(int deletedLines){
 	return points;
 }
 void togglePause(){
-	if (flags.pause == 0) {
-		flags.pause = 3;
-	} else if (flags.pause == 2){
-		flags.pause = 1;
-	}
-}
-
-void adjustPause(){
-	if (flags.pause == 1){
-		flags.pause = 0;
-	} else if (flags.pause == 3){
-		flags.pause = 2;
-	}
+	if (flags.pause) flags.pause=0;
+	else flags.pause=1;
 }
 
 void setHardDrop(){
@@ -1040,4 +1037,22 @@ JoystickAction getJoystickAction (){
 	return J_NONE;
 }
 
+void clearButtons(){
+	pause1=0;
+	pause2=0;
+}
+
+int isButton1Paused(){
+	return pause1;
+}
+
+int isButton2Paused(){
+	return pause2;
+}
+void pauseButton1(){
+	pause1=1;
+}
+void pauseButton2(){
+	pause2=1;
+}
 #endif

@@ -18,4 +18,9 @@ void togglePaused();
 void setHardDrop();
 void updateSpeed(float value);
 
+void clearButtons();
+int isButton1Paused();
+int isButton2Paused();
+void pauseButton1();
+void pauseButton2();
 #endif

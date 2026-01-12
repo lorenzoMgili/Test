@@ -75,38 +75,27 @@ NOTE tetris_song[] =
 
 const NOTE block_drop_effect[] = 
 {
-		{pause, time_croma},
-		{pause, time_croma},
-		{e5, time_croma},
-		{g5, time_croma},
-		{e5, time_croma},
+		{g4, time_croma},
 		{c5, time_croma},
-		{pause, time_croma},
 		{pause, time_croma},
 };
 
 const NOTE line_clear_effect[] = 
 {
-		{pause, time_croma},
-		{pause, time_croma},
 		{c5, time_croma},
 		{e5, time_croma},
 		{g5, time_croma},
-		{a5, time_semiminima},
-		{pause, time_croma},
 		{pause, time_croma},
 };
 
 const NOTE game_over_effect[] = 
 {
-		{pause, time_croma},
-		{pause, time_croma},
+	{pause, time_croma},
 		{e5, time_croma},
 		{d5, time_croma},
 		{c5, time_croma},
 		{b4, time_croma},
 		{a4, time_semiminima},
-		{pause, time_croma},
 		{pause, time_croma},
 };
 
